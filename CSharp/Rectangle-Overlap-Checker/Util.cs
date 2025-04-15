@@ -2,7 +2,7 @@
 
 public class Util
 {
-    public static Rectangle FindOverlap(Rectangle rect1, Rectangle rect2)
+    public static Rectangle? FindOverlap(Rectangle rect1, Rectangle rect2)
     {
         int overlapX = Math.Max(rect1.X, rect2.X);
         int overlapY = Math.Max(rect1.Y, rect2.Y);
