@@ -15,10 +15,11 @@ A collection of small but impactful projects developed for internship applicatio
 A console application that:  
 - Takes user input for canvas dimensions (origin at bottom-left).  
 - Reads rectangle coordinates from `input.txt`.  
-- Performs three key analyses:  
+- Performs four key analyses:  
   1. **Filtering** – Lists rectangles fully within the canvas.  
   2. **Overlap Detection** – Identifies non-overlapping rectangles.  
-  3. **Nesting Check** – Finds rectangles entirely enclosed by others.  
+  3. **Nesting Check** – Finds rectangles entirely enclosed by others.
+  4. **Uncovered Area Calculation** - Calculates the area of the canvas not covered by rectangles
 - Includes discussions on optimizations for calculating uncovered areas.  
 
 ### 📊 Java Internship Applicant Processor  
