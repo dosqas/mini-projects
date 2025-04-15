@@ -57,12 +57,12 @@ A performant C# solution for analyzing geometric relationships between rectangle
 ### Steps
 1. Clone the repository:
    ```bash
-   git clone https://github.com/dosqas/Mini-Projects/tree/main/CSharp/Rectangle-Overlap-Checker
+   git clone https://github.com/dosqas/Mini-Projects.git
    ```
 
 2. Navigate to the project directory:
    ```bash
-   cd Rectangle-Overlap-Checker
+   cd Mini-Projects/CSharp/Rectangle-Overlap-Checker
    ```
 
 3. Build the solution:
