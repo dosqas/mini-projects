@@ -16,8 +16,8 @@ A performant C# solution for analyzing geometric relationships between rectangle
 - ✔️ Silently skips invalid rectangles
 - ✔️ Robust validation pipeline  
 
-- ![Grid with rectangles](images/rectangles-grid.png)
-- ![File input](images/input-file.png)
+   ![Grid with rectangles](images/rectangles-grid.png)
+   ![File input](images/input-file.png)
 
 ### Geometric Analysis
 - ✔️ Containment detection (canvas bounds)  
@@ -25,7 +25,7 @@ A performant C# solution for analyzing geometric relationships between rectangle
 - ✔️ Full inclusion checking  
 - ✔️ Uncovered area calculation using SortedList for active interval tracking 
 
-![Console output](images/console-output.png)
+   ![Console output](images/console-output.png)
 
 ### Performance
 - ✔️ Optimized algorithms (O(n log n) sweep line)
