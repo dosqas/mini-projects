@@ -1,5 +1,9 @@
 # Rectangle Analysis System 🧮
 
+![C#](https://img.shields.io/badge/language-C%23-239120?logo=c-sharp&logoColor=white)
+![.NET](https://img.shields.io/badge/framework-.NET-512BD4?logo=dotnet&logoColor=white)
+![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey)
+
 ## Overview
 A performant C# solution for analyzing geometric relationships between rectangles on a user-defined canvas. The system provides:
 
