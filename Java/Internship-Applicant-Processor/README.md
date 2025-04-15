@@ -4,56 +4,68 @@
 ![Maven](https://img.shields.io/badge/apache_maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white)
 ![JUnit5](https://img.shields.io/badge/JUnit5-25A162?style=for-the-badge&logo=junit5&logoColor=white)
 
-## Overview
+## Overview ✨📊
 
-The **Internship Applicant Processing System** is a robust Java application designed to process internship applicant data efficiently. The system handles the extraction, validation, and analysis of applicant data from CSV files, offering precise statistical outputs such as the number of unique applicants, the last names of the top 3 applicants, and the average score of the top applicants before score adjustments.
+The **Internship Applicant Processing System** is a robust Java application designed to process internship applicant data efficiently. The system handles the extraction, validation, and analysis of applicant data from CSV files, offering precise statistical outputs such as:
+
+- 📌 Number of **unique applicants**  
+- 🏆 Last names of the **top 3 applicants**  
+- 📈 **Average score** of the top applicants before score adjustments  
 
 The application implements a comprehensive pipeline for processing applicant data, applying business logic for score adjustments, and providing clear JSON-formatted output.
 
-## Key Features
+## Key Features 💡🚀
 
-### Data Processing Pipeline
+### Data Processing Pipeline 🧾
+
 - **CSV Parsing**: Parses applicant data from CSV files with strict validation on:
-  - Applicant names (First, Middle, and Last)
-  - Email format and uniqueness
-  - Date and time of submission (ISO 8601 format)
-  - Score range validation (0 to 10)
+  - 🧍 Applicant names (First, Middle, and Last)
+  - 📧 Email format and uniqueness
+  - 🕒 Date and time of submission (ISO 8601 format)
+  - 📏 Score range validation (0 to 10)
 
-- **Error Handling**: Automatic filtering of malformed or invalid data entries, ensuring only valid applicants are processed.
+- **Error Handling**: ❌ Automatic filtering of malformed or invalid data entries, ensuring only valid applicants are processed.
 
-- **Memory Efficiency**: Stream-based processing to handle large datasets without excessive memory usage.
+- **Memory Efficiency**: 💾 Stream-based processing to handle large datasets without excessive memory usage.
 
-### Business Logic
+### Business Logic 🧠
+
 - **Score Adjustments**:
-  - **Bonus**: +1 point for submissions made on the first day.
-  - **Malus**: -1 point for submissions made in the second half of the last day.
+  - 🎁 **Bonus**: +1 point for submissions made on the first day.
+  - ⏳ **Malus**: -1 point for submissions made in the second half of the last day.
 
-- **Top Applicants**: Identifies the top applicants based on adjusted scores with a tie-breaking mechanism that considers the original score, submission date, and email address in case of ties.
+- **Top Applicants**: 🥇 Identifies the top applicants based on adjusted scores with a tie-breaking mechanism that considers:
+  - Original score
+  - Submission date
+  - Email address
 
 - **Statistical Calculations**:
-  - Calculates the **unique applicants** based on email address.
-  - Extracts the **last names** of the top 3 applicants based on adjusted scores.
-  - Computes the **average score** of the top half of applicants before any adjustments are made.
+  - 📊 Calculates the **unique applicants** based on email address.
+  - 🥈 Extracts the **last names** of the top 3 applicants.
+  - 📉 Computes the **average score** of the top half before any adjustments (rounded to two decimal places).
 
-### Output Generation
+### Output Generation 🧾➡️🟰
+
 - **JSON Format**: Outputs the results in a standardized JSON format with three key properties:
-  - `uniqueApplicants`: The number of unique applicants.
-  - `topApplicants`: The last names of the top 3 applicants, sorted by adjusted score.
-  - `averageScore`: The average score of the top half before any adjustments (rounded to two decimal places).
+  - `uniqueApplicants`: 📌 Number of unique applicants
+  - `topApplicants`: 🏆 Last names of the top 3 applicants
+  - `averageScore`: 📈 Average score of the top half before adjustments
 
-## Technical Highlights
+## Technical Highlights 🔧📐
 
-### Testing
-- **96%+ Test Coverage/120 tests**: Thorough testing ensures the reliability of every core component.
-  - Unit tests validate the business logic, CSV parsing, and date handling.
-  - Integration tests confirm the correct processing of applicant data through the entire pipeline.
-  - Edge cases, such as malformed data and ties in score adjustments, are specifically tested.
+### Testing 🧪✅
 
-### Code Quality
-- **Clean Architecture**: Proper separation of concerns, modular design, and clear documentation ensure maintainability and scalability.
-- **Immutable Data Models**: Ensures data integrity and reduces the risk of errors during processing.
-- **JavaDoc**: Comprehensive comments for all public methods, classes, and key components.
-- **Consistent Code Style**: Adheres to Java best practices for readability and maintainability.
+- **96%+ Test Coverage / 120 tests**: Thorough testing ensures reliability:
+  - 🧩 Unit tests for business logic, CSV parsing, and date handling
+  - 🔄 Integration tests for full pipeline validation
+  - ⚠️ Edge case coverage (e.g., malformed data, tie-breaking logic)
+
+### Code Quality 🧼💻
+
+- **Clean Architecture**: 🔍 Proper separation of concerns, modular design, and clear documentation
+- **Immutable Data Models**: 🛡️ Ensures data integrity
+- **JavaDoc**: 📚 Comprehensive comments on all public components
+- **Consistent Code Style**: 🧭 Follows Java best practices for maintainability
 
 ## Getting Started
 
@@ -65,12 +77,12 @@ The application implements a comprehensive pipeline for processing applicant dat
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/dosqas/Mini-Projects/tree/main/Java/Internship-Applicant-Processor
+   git clone https://github.com/dosqas/Mini-Projects.git
    ```
 
 2. Navigate to the project directory:
    ```bash
-   cd Internship-Applicant-Processor
+   cd Mini-Projects/Java/Internship-Applicant-Processor
    ```
 
 3. Build the project with Maven:
