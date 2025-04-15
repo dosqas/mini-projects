@@ -57,26 +57,31 @@ A performant C# solution for analyzing geometric relationships between rectangle
 ### Steps
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repo/Rectangle-Overlap-Checker.git
+   git clone https://github.com/dosqas/Mini-Projects/tree/main/CSharp/Rectangle-Overlap-Checker
    ```
+
 2. Navigate to the project directory:
    ```bash
    cd Rectangle-Overlap-Checker
    ```
+
 3. Build the solution:
    ```bash
    dotnet build
    ```
+
 4. Run the program:
    ```bash
    dotnet run
    ```
+
 5. Place your input.txt file in the same directory as the executable. Ensure it follows the required format:
    ```bash
    Name X Y Width Height
    Rect1 0 0 10 10
    Rect2 5 5 10 10
    ```
+
 6. Follow the console prompts to input canvas dimensions and analyze the rectangles.
 
 
