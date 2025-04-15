@@ -65,7 +65,7 @@ The application implements a comprehensive pipeline for processing applicant dat
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/dosqas/Mini-Projects/tree/main/CSharp/Rectangle-Overlap-Checker
+   git clone https://github.com/dosqas/Mini-Projects/tree/main/Java/Internship-Applicant-Processor
    ```
 
 2. Navigate to the project directory:
