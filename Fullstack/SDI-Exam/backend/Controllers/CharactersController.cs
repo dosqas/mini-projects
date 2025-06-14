@@ -1,4 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -13,18 +17,19 @@ public class CharactersController : ControllerBase
 
     // GET: api/characters
     [HttpGet]
-    public ActionResult<IEnumerable<Character>> GetAll()
+    public async Task<ActionResult<IEnumerable<Character>>> GetAll()
     {
         Console.WriteLine("GET: api/characters called");
-        return Ok(CharactersData.Characters);
+        var characters = await _context.Characters.ToListAsync();
+        return Ok(characters);
     }
 
     // GET: api/characters/{id}
     [HttpGet("{id}")]
-    public ActionResult<Character> GetById(int id)
+    public async Task<ActionResult<Character>> GetById(int id)
     {
         Console.WriteLine($"GET: api/characters/{id} called");
-        var character = CharactersData.Characters.FirstOrDefault(c => c.Id == id);
+        var character = await _context.Characters.FindAsync(id);
         if (character == null)
         {
             Console.WriteLine($"Character with id {id} not found.");
@@ -35,21 +40,21 @@ public class CharactersController : ControllerBase
 
     // POST: api/characters
     [HttpPost]
-    public ActionResult<Character> Create([FromBody] Character character)
+    public async Task<ActionResult<Character>> Create([FromBody] Character character)
     {
         Console.WriteLine("POST: api/characters called");
-        character.Id = CharactersData.Characters.Any() ? CharactersData.Characters.Max(c => c.Id) + 1 : 1;
-        CharactersData.Characters.Add(character);
+        _context.Characters.Add(character);
+        await _context.SaveChangesAsync();
         Console.WriteLine($"Character created: {character.Nume} (id: {character.Id})");
         return CreatedAtAction(nameof(GetById), new { id = character.Id }, character);
     }
 
     // PUT: api/characters/{id}
     [HttpPut("{id}")]
-    public IActionResult Update(int id, [FromBody] Character updated)
+    public async Task<IActionResult> Update(int id, [FromBody] Character updated)
     {
         Console.WriteLine($"PUT: api/characters/{id} called");
-        var character = CharactersData.Characters.FirstOrDefault(c => c.Id == id);
+        var character = await _context.Characters.FindAsync(id);
         if (character == null)
         {
             Console.WriteLine($"Character with id {id} not found for update.");
@@ -59,30 +64,32 @@ public class CharactersController : ControllerBase
         character.Nume = updated.Nume;
         character.Poza = updated.Poza;
         character.Abilitati = updated.Abilitati;
+        await _context.SaveChangesAsync();
         Console.WriteLine($"Character updated: {character.Nume} (id: {character.Id})");
         return NoContent();
     }
 
     // DELETE: api/characters/{id}
     [HttpDelete("{id}")]
-    public IActionResult Delete(int id)
+    public async Task<IActionResult> Delete(int id)
     {
         Console.WriteLine($"DELETE: api/characters/{id} called");
-        var character = CharactersData.Characters.FirstOrDefault(c => c.Id == id);
+        var character = await _context.Characters.FindAsync(id);
         if (character == null)
         {
             Console.WriteLine($"Character with id {id} not found for deletion.");
             return NotFound();
         }
 
-        CharactersData.Characters.Remove(character);
+        _context.Characters.Remove(character);
+        await _context.SaveChangesAsync();
         Console.WriteLine($"Character deleted: {character.Nume} (id: {character.Id})");
         return NoContent();
     }
 
     // POST: api/characters/generate
     [HttpPost("generate")]
-    public ActionResult<Character> GenerateRandom()
+    public async Task<ActionResult<Character>> GenerateRandom()
     {
         Console.WriteLine("POST: api/characters/generate called");
         var names = new[] { "Mage", "Archer", "Rogue", "Cleric", "Paladin", "Druid", "Bard" };
@@ -90,7 +97,6 @@ public class CharactersController : ControllerBase
         var name = names[rand.Next(names.Length)];
         var character = new Character
         {
-            Id = CharactersData.Characters.Any() ? CharactersData.Characters.Max(c => c.Id) + 1 : 1,
             Nume = name,
             Poza = $"/images/{name.ToLower()}.png",
             Abilitati = new Abilitati
@@ -100,28 +106,9 @@ public class CharactersController : ControllerBase
                 Mana = rand.Next(30, 121)
             }
         };
-        CharactersData.Characters.Add(character);
+        _context.Characters.Add(character);
+        await _context.SaveChangesAsync();
         Console.WriteLine($"Random character generated: {character.Nume} (id: {character.Id})");
         return Ok(character);
-    }
-
-    [HttpPost("{id}/place")]
-    public async Task<IActionResult> PlaceCharacter(int id)
-    {
-        var rand = new Random();
-        var x = rand.Next(0, 100);
-        var y = rand.Next(0, 100);
-
-        var position = new CharacterPosition
-        {
-            CharacterId = id,
-            X = x,
-            Y = y
-        };
-
-        _context.CharacterPositions.Add(position);
-        await _context.SaveChangesAsync();
-
-        return Ok(position);
     }
 }
