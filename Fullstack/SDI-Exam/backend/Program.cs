@@ -52,27 +52,35 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNamingPolicy = null; // Use PascalCase
+    });
 
 var app = builder.Build();
 
-bool add_characters = true; // Set this as needed, or read from config/env
+bool add_characters = false; // Set this as needed, or read from config/env
 
 if (add_characters)
 {
     using (var scope = app.Services.CreateScope())
     {
         var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-        if (!db.Characters.Any())
-        {
-            db.Characters.AddRange(
-                new Character { Nume = "Mage", Poza = "/images/mage.jpg", Abilitati = new Abilitati { Health = 70, Armor = 30, Mana = 100 } },
-                new Character { Nume = "Archer", Poza = "/images/archer.png", Abilitati = new Abilitati { Health = 80, Armor = 40, Mana = 60 } },
-                new Character { Nume = "Rogue", Poza = "/images/rogue.png", Abilitati = new Abilitati { Health = 75, Armor = 35, Mana = 50 } },
-                new Character { Nume = "Cleric", Poza = "/images/cleric.png", Abilitati = new Abilitati { Health = 85, Armor = 50, Mana = 90 } },
-                new Character { Nume = "Paladin", Poza = "/images/paladin.jpg", Abilitati = new Abilitati { Health = 95, Armor = 80, Mana = 70 } }
-            );
-            db.SaveChanges();
-        }
+
+        // Delete all existing characters
+        db.Characters.RemoveRange(db.Characters);
+        db.SaveChanges();
+
+        // Add new seed characters
+        db.Characters.AddRange(
+            new Character { Nume = "Mage", Poza = "/images/mage.jpg", Health = 70, Armor = 30, Mana = 100 },
+            new Character { Nume = "Archer", Poza = "/images/archer.png", Health = 80, Armor = 40, Mana = 60 },
+            new Character { Nume = "Rogue", Poza = "/images/rogue.png", Health = 75, Armor = 35, Mana = 50 },
+            new Character { Nume = "Cleric", Poza = "/images/cleric.png", Health = 85, Armor = 50, Mana = 90 },
+            new Character { Nume = "Paladin", Poza = "/images/paladin.jpg", Health = 95, Armor = 80, Mana = 70 }
+        );
+        db.SaveChanges();
     }
 }
 

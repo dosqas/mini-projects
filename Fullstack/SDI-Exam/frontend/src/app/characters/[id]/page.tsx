@@ -13,6 +13,24 @@ export default function CharacterDetailPage({ params }: { params: Promise<{ id: 
   const [edit, setEdit] = useState(false);
   const [form, setForm] = useState({ nume: "", poza: "", health: "", armor: "", mana: "" });
 
+    const handlePlace = async () => {
+    // POST to your backend to create a random position for this character
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/positions`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id }) // or whatever your API expects
+      }
+    );
+    const data = await res.json();
+
+    localStorage.setItem("myCharacterId", id);
+
+    // Redirect to grid page with x and y from the response
+    router.push(`/map`);
+  };
+
   useEffect(() => {
     fetch(`${API_URL}/${id}`)
       .then(res => res.json())
@@ -21,9 +39,9 @@ export default function CharacterDetailPage({ params }: { params: Promise<{ id: 
         setForm({
           nume: data.nume,
           poza: data.poza,
-          health: String(data.abilitati.health),
-          armor: String(data.abilitati.armor),
-          mana: String(data.abilitati.mana),
+          health: String(data.health),
+          armor: String(data.armor),
+          mana: String(data.mana),
         });
       });
   }, [id]);
@@ -90,17 +108,20 @@ export default function CharacterDetailPage({ params }: { params: Promise<{ id: 
         </div>
       ) : (
         <>
-          <h1>{character.nume}</h1>
-          <img src={character.poza} alt={character.nume} width={100} height={100} />
-          <p>ID: {character.id}</p>
+          <h1>{character.Nume}</h1>
+          <img src={character.Poza} alt={character.nume} width={100} height={100} />
+          <p>ID: {character.Id}</p>
           <h3>Abilități</h3>
           <ul>
-            <li>Health: {character.abilitati.health}</li>
-            <li>Armor: {character.abilitati.armor}</li>
-            <li>Mana: {character.abilitati.mana}</li>
+            <li>Health: {character.Health}</li>
+            <li>Armor: {character.Armor}</li>
+            <li>Mana: {character.Mana}</li>
           </ul>
           <button onClick={() => setEdit(true)}>Edit</button>
           <button onClick={handleDelete} style={{ color: "red" }}>Delete</button>
+          <button onClick={handlePlace}>
+            Place Character Randomly
+          </button>
         </>
       )}
     </div>

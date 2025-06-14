@@ -1,8 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -63,7 +60,9 @@ public class CharactersController : ControllerBase
 
         character.Nume = updated.Nume;
         character.Poza = updated.Poza;
-        character.Abilitati = updated.Abilitati;
+        character.Health = updated.Health;
+        character.Armor = updated.Armor;
+        character.Mana = updated.Mana;
         await _context.SaveChangesAsync();
         Console.WriteLine($"Character updated: {character.Nume} (id: {character.Id})");
         return NoContent();
@@ -99,12 +98,9 @@ public class CharactersController : ControllerBase
         {
             Nume = name,
             Poza = $"/images/{name.ToLower()}.png",
-            Abilitati = new Abilitati
-            {
-                Health = rand.Next(50, 121),
-                Armor = rand.Next(20, 91),
-                Mana = rand.Next(30, 121)
-            }
+            Health = rand.Next(50, 101),
+            Armor = rand.Next(20, 51),
+            Mana = rand.Next(30, 101)
         };
         _context.Characters.Add(character);
         await _context.SaveChangesAsync();

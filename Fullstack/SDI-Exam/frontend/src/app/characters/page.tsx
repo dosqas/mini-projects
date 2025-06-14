@@ -30,9 +30,9 @@ export default function CharactersPage() {
 
   // Statistics
   const total = characters.length;
-  const avgHealth = total ? (characters.reduce((sum, c) => sum + c.abilitati.health, 0) / total) : 0;
-  const avgArmor = total ? (characters.reduce((sum, c) => sum + c.abilitati.armor, 0) / total) : 0;
-  const avgMana = total ? (characters.reduce((sum, c) => sum + c.abilitati.mana, 0) / total) : 0;
+  const avgHealth = total ? (characters.reduce((sum, c) => sum + c.Health, 0) / total) : 0;
+  const avgArmor = total ? (characters.reduce((sum, c) => sum + c.Armor, 0) / total) : 0;
+  const avgMana = total ? (characters.reduce((sum, c) => sum + c.Mana, 0) / total) : 0;
 
   const handleAdd = async () => {
     await fetch(API_URL, {
@@ -113,14 +113,14 @@ export default function CharactersPage() {
 
       <ul>
         {characters.map((char) => (
-          <li key={char.id}>
-            <Link href={`/characters/${char.id}`}>
-              <div style={{ display: "flex", alignItems: "center", cursor: "pointer" }}>
-                <img src={char.poza} alt={char.nume} width={50} height={50} style={{ marginRight: 10 }} />
-                <span>{char.nume}</span>
-              </div>
+        <li key={char.Id}>
+            <Link href={`/characters/${char.Id}`}>
+            <div style={{ display: "flex", alignItems: "center", cursor: "pointer" }}>
+                <img src={char.Poza} alt={char.Nume} width={50} height={50} style={{ marginRight: 10 }} />
+                <span>{char.Nume}</span>
+            </div>
             </Link>
-          </li>
+        </li>
         ))}
       </ul>
     </div>
