@@ -4,6 +4,8 @@ public class Character
     public string Nume { get; set; }
     public string Poza { get; set; }
     public Abilitati Abilitati { get; set; }
+    public CharacterPosition CharacterPosition { get; set; }
+
 }
 
 public class Abilitati

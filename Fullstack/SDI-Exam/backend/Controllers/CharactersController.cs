@@ -99,4 +99,24 @@ public class CharactersController : ControllerBase
         Console.WriteLine($"Random character generated: {character.Nume} (id: {character.Id})");
         return Ok(character);
     }
+
+    [HttpPost("{id}/place")]
+    public async Task<IActionResult> PlaceCharacter(int id)
+    {
+        var rand = new Random();
+        var x = rand.Next(0, 100);
+        var y = rand.Next(0, 100);
+
+        var position = new CharacterPosition
+        {
+            CharacterId = id,
+            X = x,
+            Y = y
+        };
+
+        _context.CharacterPositions.Add(position);
+        await _context.SaveChangesAsync();
+
+        return Ok(position);
+    }
 }
