@@ -1,11 +1,16 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
 
 [ApiController]
 [Route("api/[controller]")]
 public class CharactersController : ControllerBase
 {
+    private readonly AppDbContext _context;
+
+    public CharactersController(AppDbContext context)
+    {
+        _context = context;
+    }
+
     // GET: api/characters
     [HttpGet]
     public ActionResult<IEnumerable<Character>> GetAll()
