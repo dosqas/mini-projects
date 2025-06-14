@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 public class Character
 {
     public int Id { get; set; }
@@ -8,6 +10,7 @@ public class Character
 
 }
 
+[Owned]
 public class Abilitati
 {
     public float Health { get; set; }
